@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*
+
 
 Route::get('/hello', function ( ){
     return response('<h1> welcome</h1>')
@@ -33,4 +33,19 @@ Route::get('/post/{id}', function($id){
 
 Route::get('/search', function(Request $request){
    return  $request->name;
+});
+*/
+
+
+Route::get('/', function () {
+    return view('listings', [
+        'header'=> 'latest listing',
+        'listings' =>Listing::all(),
+    ]);
+});
+
+Route::get('/listings/{id}', function($id){
+    return view('listing', [
+        'listing' => Listing::find($id),
+    ]);
 });
